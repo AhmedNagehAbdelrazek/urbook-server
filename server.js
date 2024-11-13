@@ -4,6 +4,7 @@ const morgan = require("morgan");
 const http = require('http');
 const socketServer = require('./socketServer');
 const authenticate = require("./middlewares/socketAuthentacation");
+const cors = require("cors");
 
 const mainRoute = require("./Routes/index");
 const globalErrorHandler = require("./middlewares/globalErrorHandler");
@@ -11,6 +12,8 @@ const globalErrorHandler = require("./middlewares/globalErrorHandler");
 dotenv.config({ path: ".env" });
 
 const app = express();
+
+app.use(cors({origin:"*",methods:["GET","POST","PUT","DELETE","PATCH"]}));
 
 app.use(express.json());
 app.use(morgan("dev"));
